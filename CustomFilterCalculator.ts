@@ -12,8 +12,7 @@ interface Filter {
 
 interface Combination {
   targetSize: string;
-  filter1: string;
-  filter2?: string;
+  filters: string[]; // IDs of all filters used in the combination
   assemblyOrientation: "portrait" | "landscape";
   cost: number;
   trimArea: number; // Square inches of material trimmed
@@ -25,15 +24,6 @@ const parseSize = (size: string): { length: number; width: number; height: numbe
   return { length, width, height };
 };
 
-// Check if the target can fit within the filter (in any orientation)
-const canCutDown = (filter: Filter, target: { length: number; width: number; height: number }): boolean => {
-  return (
-    filter.height === target.height &&
-    ((filter.length >= target.length && filter.width >= target.width) || // Portrait
-      (filter.length >= target.width && filter.width >= target.length)) // Landscape
-  );
-};
-
 // Calculate the trim area
 const calculateTrimArea = (combinedLength: number, combinedWidth: number, target: { length: number; width: number }): number => {
   const combinedArea = combinedLength * combinedWidth;
@@ -41,93 +31,83 @@ const calculateTrimArea = (combinedLength: number, combinedWidth: number, target
   return combinedArea - targetArea;
 };
 
-// Main function to find combinations
-const findCombinations = (targetSize: string, filters: Filter[]): Combination[] => {
-  const target = parseSize(targetSize);
+// Recursive function to find all valid combinations
+const findCombinationsRecursive = (
+  target: { length: number; width: number; height: number },
+  filters: Filter[],
+  usedFilters: Filter[] = [],
+  orientation: "portrait" | "landscape" | null = null
+): Combination[] => {
   const combinations: Combination[] = [];
 
-  console.log("Target Size:", target);
+  // Calculate the combined dimensions of the currently used filters
+  const combinedLength = orientation === "landscape"
+    ? usedFilters.reduce((sum, filter) => sum + filter.length, 0)
+    : usedFilters[0]?.length || 0;
 
-  // Step 1: Check single filters that can be cut down
-  filters.forEach((filter) => {
-    if (canCutDown(filter, target)) {
-      const orientation = filter.length >= filter.width ? "portrait" : "landscape";
-      const trimArea = calculateTrimArea(filter.length, filter.width, target);
-      combinations.push({
-        targetSize,
-        filter1: filter.filterID,
-        assemblyOrientation: orientation,
-        cost: filter.price,
-        trimArea
-      });
-    }
-  });
+  const combinedWidth = orientation === "portrait"
+    ? usedFilters.reduce((sum, filter) => sum + filter.width, 0)
+    : usedFilters[0]?.width || 0;
 
-  // Step 2: Check combinations of two filters
-  for (let i = 0; i < filters.length; i++) {
-    for (let j = i + 1; j < filters.length; j++) {
-      const filter1 = filters[i];
-      const filter2 = filters[j];
+  const combinedCost = usedFilters.reduce((sum, filter) => sum + filter.price, 0);
 
-      // Allow combining filters with different heights **if orientation still lines up correctly**
-      if (
-        (filter1.orientation === "portrait" && filter2.orientation === "portrait") ||
-        (filter1.orientation === "landscape" && filter2.orientation === "landscape")
-      ) {
-        // Portrait orientation: Matching lengths or summable heights
-        if (filter1.length === filter2.length) {
-          const combinedLength = filter1.length;
-          const combinedWidth = filter1.width + filter2.width;
+  // Check if the current combination meets the target size
+  if (usedFilters.length > 0 && combinedLength >= target.length && combinedWidth >= target.width) {
+    const trimArea = calculateTrimArea(combinedLength, combinedWidth, target);
+    combinations.push({
+      targetSize: `${target.length}x${target.width}x${target.height}`,
+      filters: usedFilters.map((filter) => filter.filterID),
+      assemblyOrientation: orientation || "portrait",
+      cost: combinedCost,
+      trimArea
+    });
+  }
 
-          if (combinedLength >= target.length && combinedWidth >= target.width) {
-            const trimArea = calculateTrimArea(combinedLength, combinedWidth, target);
-            const cost = filter1.price + filter2.price;
-            combinations.push({
-              targetSize,
-              filter1: filter1.filterID,
-              filter2: filter2.filterID,
-              assemblyOrientation: "portrait",
-              cost,
-              trimArea
-            });
-          }
-        }
+  // Try adding each unused filter
+  for (const filter of filters) {
+    // Skip filters that don't match the height of the target
+    if (filter.height !== target.height) continue;
 
-        // Landscape orientation: Matching widths or summable lengths
-        if (filter1.width === filter2.width) {
-          const combinedLength = filter1.length + filter2.length;
-          const combinedWidth = filter1.width;
+    // Determine the orientation if not already set
+    const newOrientation = orientation || filter.orientation;
 
-          if (combinedLength >= target.length && combinedWidth >= target.width) {
-            const trimArea = calculateTrimArea(combinedLength, combinedWidth, target);
-            const cost = filter1.price + filter2.price;
-            combinations.push({
-              targetSize,
-              filter1: filter1.filterID,
-              filter2: filter2.filterID,
-              assemblyOrientation: "landscape",
-              cost,
-              trimArea
-            });
-          }
-        }
-      }
+    // Skip filters that don't align with the orientation
+    if (newOrientation !== filter.orientation) continue;
+
+    // Check if the filter can align with the combined size
+    if (
+      (newOrientation === "portrait" && combinedLength === filter.length) ||
+      (newOrientation === "landscape" && combinedWidth === filter.width) ||
+      usedFilters.length === 0 // Allow starting with any filter
+    ) {
+      // Recurse with this filter added to the combination
+      const remainingFilters = filters.filter((f) => f !== filter);
+      combinations.push(
+        ...findCombinationsRecursive(target, remainingFilters, [...usedFilters, filter], newOrientation)
+      );
     }
   }
 
-  // Debugging: Log all combinations found
-  console.log("All Combinations Found:", combinations);
+  return combinations;
+};
 
-  // Step 3: Handle cases where no combinations are found
+// Main function to find combinations
+const findCombinations = (targetSize: string, filters: Filter[]): Combination[] => {
+  const target = parseSize(targetSize);
+
+  console.log("Target Size:", target);
+
+  // Find all combinations recursively
+  const combinations = findCombinationsRecursive(target, filters);
+
+  // Handle cases where no combinations are found
   if (combinations.length === 0) {
     console.log("No valid combinations found for the target size:", targetSize);
     return [];
   }
 
-  // Step 4: Return up to 6 lowest-cost combinations
-  return combinations
-    .sort((a, b) => a.cost - b.cost)
-    .slice(0, 6);
+  // Return up to 6 lowest-cost combinations
+  return combinations.sort((a, b) => a.cost - b.cost).slice(0, 6);
 };
 
 // Read filters from filters.json
@@ -135,7 +115,7 @@ const filtersFilePath = path.resolve(__dirname, "filters.json");
 const filters: Filter[] = JSON.parse(fs.readFileSync(filtersFilePath, "utf8"));
 
 // Example usage
-const targetSize = "15x42x2";
+const targetSize = "15x60x1"; // Example: combining multiple filters for a large size
 const results = findCombinations(targetSize, filters);
 
 if (results.length === 0) {
