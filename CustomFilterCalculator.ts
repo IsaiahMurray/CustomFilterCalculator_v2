@@ -125,3 +125,7 @@ const findCombinations = (targetSize: string, filters: Filter[]): Combination[] 
 const filtersFilePath = path.resolve(__dirname, "filters.json");
 const filters: Filter[] = JSON.parse(fs.readFileSync(filtersFilePath, "utf8"));
 
+// Example usage
+const targetSize = "15x42x1";
+const results = findCombinations(targetSize, filters);
+console.log("Final Results:", results);
