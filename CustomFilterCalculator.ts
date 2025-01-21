@@ -48,6 +48,23 @@ const findCombinations = (targetSize: string, filters: Filter[]): Combination[] 
 
   console.log("Target Size:", target);
 
+  // Step 1: Check single filters that can be cut down
+  filters.forEach((filter) => {
+    if (canCutDown(filter, target)) {
+      const orientation = filter.length >= filter.width ? "portrait" : "landscape";
+      const trimArea = calculateTrimArea(filter.length, filter.width, target);
+      combinations.push({
+        targetSize,
+        filter1: filter.filterID,
+        assemblyOrientation: orientation,
+        cost: filter.price,
+        trimArea
+      });
+    }
+  });
+
+  
+
   // Debugging: Log all combinations found
   console.log("All Combinations Found:", combinations);
 
