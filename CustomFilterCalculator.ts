@@ -34,6 +34,13 @@ const canCutDown = (filter: Filter, target: { length: number; width: number; hei
   );
 };
 
+// Calculate the trim area
+const calculateTrimArea = (combinedLength: number, combinedWidth: number, target: { length: number; width: number }): number => {
+  const combinedArea = combinedLength * combinedWidth;
+  const targetArea = target.length * target.width;
+  return combinedArea - targetArea;
+};
+
 // Read filters from filters.json
 const filtersFilePath = path.resolve(__dirname, "filters.json");
 const filters: Filter[] = JSON.parse(fs.readFileSync(filtersFilePath, "utf8"));
