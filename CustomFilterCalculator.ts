@@ -18,3 +18,8 @@ interface Combination {
   cost: number;
   trimArea: number; // Square inches of material trimmed
 }
+
+
+// Read filters from filters.json
+const filtersFilePath = path.resolve(__dirname, "filters.json");
+const filters: Filter[] = JSON.parse(fs.readFileSync(filtersFilePath, "utf8"));
