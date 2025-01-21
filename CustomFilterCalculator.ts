@@ -19,6 +19,11 @@ interface Combination {
   trimArea: number; // Square inches of material trimmed
 }
 
+// Parse a size string like "15x42x1" into an object
+const parseSize = (size: string): { length: number; width: number; height: number } => {
+  const [length, width, height] = size.split("x").map(Number);
+  return { length, width, height };
+};
 
 // Read filters from filters.json
 const filtersFilePath = path.resolve(__dirname, "filters.json");
