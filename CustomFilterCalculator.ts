@@ -41,6 +41,22 @@ const calculateTrimArea = (combinedLength: number, combinedWidth: number, target
   return combinedArea - targetArea;
 };
 
+// Main function to find combinations
+const findCombinations = (targetSize: string, filters: Filter[]): Combination[] => {
+  const target = parseSize(targetSize);
+  const combinations: Combination[] = [];
+
+  console.log("Target Size:", target);
+
+  // Debugging: Log all combinations found
+  console.log("All Combinations Found:", combinations);
+
+  // Return up to 6 lowest-cost combinations
+  return combinations
+    .sort((a, b) => a.cost - b.cost)
+    .slice(0, 6);
+};
+
 // Read filters from filters.json
 const filtersFilePath = path.resolve(__dirname, "filters.json");
 const filters: Filter[] = JSON.parse(fs.readFileSync(filtersFilePath, "utf8"));
