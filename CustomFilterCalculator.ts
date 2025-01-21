@@ -69,16 +69,19 @@ const findCombinations = (targetSize: string, filters: Filter[]): Combination[] 
       const filter1 = filters[i];
       const filter2 = filters[j];
 
-      // Filters must have the same height
-      if (filter1.height === target.height && filter2.height === target.height) {
-        // Portrait orientation: Matching lengths, sum widths
+      // Allow combining filters with different heights **if orientation still lines up correctly**
+      if (
+        (filter1.orientation === "portrait" && filter2.orientation === "portrait") ||
+        (filter1.orientation === "landscape" && filter2.orientation === "landscape")
+      ) {
+        // Portrait orientation: Matching lengths or summable heights
         if (filter1.length === filter2.length) {
           const combinedLength = filter1.length;
           const combinedWidth = filter1.width + filter2.width;
 
           if (combinedLength >= target.length && combinedWidth >= target.width) {
             const trimArea = calculateTrimArea(combinedLength, combinedWidth, target);
-            const cost = filter1.price + filter2.price; // Sum of the two prices
+            const cost = filter1.price + filter2.price;
             combinations.push({
               targetSize,
               filter1: filter1.filterID,
@@ -90,14 +93,14 @@ const findCombinations = (targetSize: string, filters: Filter[]): Combination[] 
           }
         }
 
-        // Landscape orientation: Matching widths, sum lengths
+        // Landscape orientation: Matching widths or summable lengths
         if (filter1.width === filter2.width) {
           const combinedLength = filter1.length + filter2.length;
           const combinedWidth = filter1.width;
 
           if (combinedLength >= target.length && combinedWidth >= target.width) {
             const trimArea = calculateTrimArea(combinedLength, combinedWidth, target);
-            const cost = filter1.price + filter2.price; // Sum of the two prices
+            const cost = filter1.price + filter2.price;
             combinations.push({
               targetSize,
               filter1: filter1.filterID,
@@ -132,9 +135,8 @@ const filtersFilePath = path.resolve(__dirname, "filters.json");
 const filters: Filter[] = JSON.parse(fs.readFileSync(filtersFilePath, "utf8"));
 
 // Example usage
-const targetSize = "15x42x1";
+const targetSize = "15x42x2";
 const results = findCombinations(targetSize, filters);
-console.log("Final Results:", results);
 
 if (results.length === 0) {
   console.log(`No valid combinations could be found for target size ${targetSize}.`);
