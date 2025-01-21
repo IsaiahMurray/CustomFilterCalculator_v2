@@ -25,6 +25,16 @@ const parseSize = (size: string): { length: number; width: number; height: numbe
   return { length, width, height };
 };
 
+// Check if the target can fit within the filter (in any orientation)
+const canCutDown = (filter: Filter, target: { length: number; width: number; height: number }): boolean => {
+  return (
+    filter.height === target.height &&
+    ((filter.length >= target.length && filter.width >= target.width) || // Portrait
+      (filter.length >= target.width && filter.width >= target.length)) // Landscape
+  );
+};
+
 // Read filters from filters.json
 const filtersFilePath = path.resolve(__dirname, "filters.json");
 const filters: Filter[] = JSON.parse(fs.readFileSync(filtersFilePath, "utf8"));
+
