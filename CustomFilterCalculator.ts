@@ -63,12 +63,59 @@ const findCombinations = (targetSize: string, filters: Filter[]): Combination[] 
     }
   });
 
-  
+  // Step 2: Check combinations of two filters
+  for (let i = 0; i < filters.length; i++) {
+    for (let j = i + 1; j < filters.length; j++) {
+      const filter1 = filters[i];
+      const filter2 = filters[j];
+
+      // Filters must have the same height
+      if (filter1.height === target.height && filter2.height === target.height) {
+        // Portrait orientation: Matching lengths, sum widths
+        if (filter1.length === filter2.length) {
+          const combinedLength = filter1.length;
+          const combinedWidth = filter1.width + filter2.width;
+
+          if (combinedLength >= target.length && combinedWidth >= target.width) {
+            const trimArea = calculateTrimArea(combinedLength, combinedWidth, target);
+            const cost = filter1.price + filter2.price;
+            combinations.push({
+              targetSize,
+              filter1: filter1.filterID,
+              filter2: filter2.filterID,
+              assemblyOrientation: "portrait",
+              cost,
+              trimArea
+            });
+          }
+        }
+
+        // Landscape orientation: Matching widths, sum lengths
+        if (filter1.width === filter2.width) {
+          const combinedLength = filter1.length + filter2.length;
+          const combinedWidth = filter1.width;
+
+          if (combinedLength >= target.length && combinedWidth >= target.width) {
+            const trimArea = calculateTrimArea(combinedLength, combinedWidth, target);
+            const cost = filter1.price + filter2.price;
+            combinations.push({
+              targetSize,
+              filter1: filter1.filterID,
+              filter2: filter2.filterID,
+              assemblyOrientation: "landscape",
+              cost,
+              trimArea
+            });
+          }
+        }
+      }
+    }
+  }
 
   // Debugging: Log all combinations found
   console.log("All Combinations Found:", combinations);
 
-  // Return up to 6 lowest-cost combinations
+  // Step 3: Return up to 6 lowest-cost combinations
   return combinations
     .sort((a, b) => a.cost - b.cost)
     .slice(0, 6);
