@@ -78,7 +78,7 @@ const findCombinations = (targetSize: string, filters: Filter[]): Combination[] 
 
           if (combinedLength >= target.length && combinedWidth >= target.width) {
             const trimArea = calculateTrimArea(combinedLength, combinedWidth, target);
-            const cost = filter1.price + filter2.price;
+            const cost = filter1.price + filter2.price; // Sum of the two prices
             combinations.push({
               targetSize,
               filter1: filter1.filterID,
@@ -97,7 +97,7 @@ const findCombinations = (targetSize: string, filters: Filter[]): Combination[] 
 
           if (combinedLength >= target.length && combinedWidth >= target.width) {
             const trimArea = calculateTrimArea(combinedLength, combinedWidth, target);
-            const cost = filter1.price + filter2.price;
+            const cost = filter1.price + filter2.price; // Sum of the two prices
             combinations.push({
               targetSize,
               filter1: filter1.filterID,
@@ -115,7 +115,13 @@ const findCombinations = (targetSize: string, filters: Filter[]): Combination[] 
   // Debugging: Log all combinations found
   console.log("All Combinations Found:", combinations);
 
-  // Step 3: Return up to 6 lowest-cost combinations
+  // Step 3: Handle cases where no combinations are found
+  if (combinations.length === 0) {
+    console.log("No valid combinations found for the target size:", targetSize);
+    return [];
+  }
+
+  // Step 4: Return up to 6 lowest-cost combinations
   return combinations
     .sort((a, b) => a.cost - b.cost)
     .slice(0, 6);
@@ -129,3 +135,9 @@ const filters: Filter[] = JSON.parse(fs.readFileSync(filtersFilePath, "utf8"));
 const targetSize = "15x42x1";
 const results = findCombinations(targetSize, filters);
 console.log("Final Results:", results);
+
+if (results.length === 0) {
+  console.log(`No valid combinations could be found for target size ${targetSize}.`);
+} else {
+  console.log("Final Results:", results);
+}
