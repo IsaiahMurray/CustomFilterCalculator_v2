@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch(baseURL + "files.json"); 
             const { files } = await response.json();
+            console.log(files)
             return files.map(file => baseURL + file);
         } catch (error) {
             console.error("Error loading file list:", error);
