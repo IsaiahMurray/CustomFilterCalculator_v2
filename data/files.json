@@ -1,3 +1,11 @@
 {
-    "files": ["./../data/filters.json", "./../data/crossSplitFilters1.json", "./../data/quadSplitFilters1.json", "./../data/splitCombinedFilters1.json", "./../data/splitFilters1.json", "./../data/triSplitCombinedFilters.json", "./../data/triSplitFilters1Inch.json"]
+    "files": [
+        "data/filters.json",
+        "data/crossSplitFilters1.json",
+        "data/quadSplitFilters1.json",
+        "data/splitCombinedFilters1.json",
+        "data/splitFilters1.json",
+        "data/triSplitCombinedFilters.json",
+        "data/triSplitFilters1Inch.json"
+    ]
 }
