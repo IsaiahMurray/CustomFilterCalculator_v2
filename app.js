@@ -64,7 +64,77 @@ function splitFilters(inputFile, outputFile) {
     fs.writeFileSync(outputFile, JSON.stringify(Array.from(uniqueFilters.values()), null, 2));
     console.log("File saved as ".concat(outputFile));
 }
+function splitByThree(inputFile, outputFile) {
+    var data = JSON.parse(fs.readFileSync(inputFile, "utf-8"));
+    var splitData = [];
+    data.forEach(function (filter) {
+        var newLength = filter.length / 3;
+        if (newLength < 4)
+            return;
+        for (var i = 0; i < 3; i++) {
+            splitData.push({
+                length: newLength,
+                width: filter.width,
+                height: filter.height,
+                orientation: filter.orientation,
+                price: filter.price,
+                filterID: "".concat(newLength, "x").concat(filter.width, "x").concat(filter.height),
+                originalFilterID: filter.filterID,
+                qty: 3,
+            });
+        }
+    });
+    fs.writeFileSync(outputFile, JSON.stringify(splitData, null, 2));
+}
+function splitByFour(inputFile, outputFile) {
+    var data = JSON.parse(fs.readFileSync(inputFile, "utf-8"));
+    var splitData = [];
+    data.forEach(function (filter) {
+        var newLength = filter.length / 4;
+        if (newLength < 4)
+            return;
+        for (var i = 0; i < 4; i++) {
+            splitData.push({
+                length: newLength,
+                width: filter.width,
+                height: filter.height,
+                orientation: filter.orientation,
+                price: filter.price,
+                filterID: "".concat(newLength, "x").concat(filter.width, "x").concat(filter.height),
+                originalFilterID: filter.filterID,
+                qty: 4,
+            });
+        }
+    });
+    fs.writeFileSync(outputFile, JSON.stringify(splitData, null, 2));
+}
+function splitCross(inputFile, outputFile) {
+    var data = JSON.parse(fs.readFileSync(inputFile, "utf-8"));
+    var splitData = [];
+    data.forEach(function (filter) {
+        var newLength = filter.length / 2;
+        var newWidth = filter.width / 2;
+        if (newLength < 4 || newWidth < 4)
+            return;
+        for (var i = 0; i < 4; i++) {
+            splitData.push({
+                length: newLength,
+                width: newWidth,
+                height: filter.height,
+                orientation: filter.orientation,
+                price: filter.price,
+                filterID: "".concat(newLength, "x").concat(newWidth, "x").concat(filter.height),
+                originalFilterID: filter.filterID,
+                qty: 4,
+            });
+        }
+    });
+    fs.writeFileSync(outputFile, JSON.stringify(splitData, null, 2));
+}
 splitFilters("filters1Inch.json", "splitFilters1Inch.json");
+splitByThree("filters1Inch.json", "triSplitFilters1Inch.json");
+splitByFour("filters1Inch.json", "quadSplitFilters1Inch.json");
+splitCross("filters1Inch.json", "crossSplitFilters1Inch.json");
 /* Files
 ! filters.json
  {

@@ -87,8 +87,86 @@ function splitFilters(inputFile: string, outputFile: string): void {
   console.log(`File saved as ${outputFile}`);
 }
 
-splitFilters("filters1Inch.json", "splitFilters1Inch.json");
+function splitByThree(inputFile: string, outputFile: string): void {
+  const data: Filter[] = JSON.parse(fs.readFileSync(inputFile, "utf-8"));
+  let splitData: SplitFilter[] = [];
 
+  data.forEach((filter) => {
+    let newLength = filter.length / 3;
+    if (newLength < 4) return;
+
+    for (let i = 0; i < 3; i++) {
+      splitData.push({
+        length: newLength,
+        width: filter.width,
+        height: filter.height,
+        orientation: filter.orientation,
+        price: filter.price,
+        filterID: `${newLength}x${filter.width}x${filter.height}`,
+        originalFilterID: filter.filterID,
+        qty: 3,
+      });
+    }
+  });
+
+  fs.writeFileSync(outputFile, JSON.stringify(splitData, null, 2));
+}
+
+function splitByFour(inputFile: string, outputFile: string): void {
+  const data: Filter[] = JSON.parse(fs.readFileSync(inputFile, "utf-8"));
+  let splitData: SplitFilter[] = [];
+
+  data.forEach((filter) => {
+    let newLength = filter.length / 4;
+    if (newLength < 4) return;
+
+    for (let i = 0; i < 4; i++) {
+      splitData.push({
+        length: newLength,
+        width: filter.width,
+        height: filter.height,
+        orientation: filter.orientation,
+        price: filter.price,
+        filterID: `${newLength}x${filter.width}x${filter.height}`,
+        originalFilterID: filter.filterID,
+        qty: 4,
+      });
+    }
+  });
+
+  fs.writeFileSync(outputFile, JSON.stringify(splitData, null, 2));
+}
+
+function splitCross(inputFile: string, outputFile: string): void {
+  const data: Filter[] = JSON.parse(fs.readFileSync(inputFile, "utf-8"));
+  let splitData: SplitFilter[] = [];
+
+  data.forEach((filter) => {
+    let newLength = filter.length / 2;
+    let newWidth = filter.width / 2;
+
+    if (newLength < 4 || newWidth < 4) return;
+
+    for (let i = 0; i < 4; i++) {
+      splitData.push({
+        length: newLength,
+        width: newWidth,
+        height: filter.height,
+        orientation: filter.orientation,
+        price: filter.price,
+        filterID: `${newLength}x${newWidth}x${filter.height}`,
+        originalFilterID: filter.filterID,
+        qty: 4,
+      });
+    }
+  });
+
+  fs.writeFileSync(outputFile, JSON.stringify(splitData, null, 2));
+}
+splitFilters("filters1Inch.json", "splitFilters1Inch.json");
+splitByThree("filters1Inch.json", "triSplitFilters1Inch.json");
+splitByFour("filters1Inch.json", "quadSplitFilters1Inch.json");
+splitCross("filters1Inch.json", "crossSplitFilters1Inch.json");
 /* Files
 ! filters.json
  {
