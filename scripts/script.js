@@ -55,13 +55,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function fetchFileData(file) {
         try {
-            const response = await fetch(file);
+            const response = await fetch(`https://IsaiahMurray.github.io/CustomFilterCalculator_v2/${file}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
             return await response.json();
         } catch (error) {
             console.error(`Error loading ${file}:`, error);
             return [];
         }
     }
+    
 
     function findMatchingFilters(filters, length, width, height) {
         return filters
