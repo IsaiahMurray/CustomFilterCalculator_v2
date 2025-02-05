@@ -52,7 +52,7 @@ const processFilters = (inputFilePath: string, outputFilePath: string): void => 
 };
 
 // Paths to the input and output files
-const inputFilePath = path.resolve(__dirname, "filters.txt");
+const inputFilePath = path.resolve(__dirname, "1Inchfilters.txt");
 const outputFilePath = path.resolve(__dirname, "filters.json");
 
 // Process the file

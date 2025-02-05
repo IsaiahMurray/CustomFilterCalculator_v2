@@ -1,0 +1,605 @@
+[
+  {
+    "length": 20,
+    "width": 5,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.4,
+    "filterID": "5x20x1",
+    "originalFilter": "10.10.1"
+  },
+  {
+    "length": 5,
+    "width": 40,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.46,
+    "filterID": "5x40x1",
+    "originalFilter": "10.20.1"
+  },
+  {
+    "length": 20,
+    "width": 10,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.46,
+    "filterID": "10x20x1",
+    "originalFilter": "10.20.1"
+  },
+  {
+    "length": 5,
+    "width": 48,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.88,
+    "filterID": "5x48x1",
+    "originalFilter": "10.24.1"
+  },
+  {
+    "length": 24,
+    "width": 10,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.46,
+    "filterID": "10x24x1",
+    "originalFilter": "12.20.1"
+  },
+  {
+    "length": 5,
+    "width": 50,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.37,
+    "filterID": "5x50x1",
+    "originalFilter": "10.25.1"
+  },
+  {
+    "length": 10,
+    "width": 25.0,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.37,
+    "filterID": "10x25.0x1",
+    "originalFilter": "10.25.1"
+  },
+  {
+    "length": 5,
+    "width": 60,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.84,
+    "filterID": "5x60x1",
+    "originalFilter": "10.30.1"
+  },
+  {
+    "length": 30,
+    "width": 10,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.84,
+    "filterID": "10x30x1",
+    "originalFilter": "15.20.1"
+  },
+  {
+    "length": 24,
+    "width": 6,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.46,
+    "filterID": "6x24x1",
+    "originalFilter": "12.12.1"
+  },
+  {
+    "length": 6,
+    "width": 32,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.46,
+    "filterID": "6x32x1",
+    "originalFilter": "12.16.1"
+  },
+  {
+    "length": 24,
+    "width": 8,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.46,
+    "filterID": "8x24x1",
+    "originalFilter": "12.16.1"
+  },
+  {
+    "length": 6,
+    "width": 36,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.46,
+    "filterID": "6x36x1",
+    "originalFilter": "12.18.1"
+  },
+  {
+    "length": 24,
+    "width": 9,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.46,
+    "filterID": "9x24x1",
+    "originalFilter": "12.18.1"
+  },
+  {
+    "length": 6,
+    "width": 40,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.46,
+    "filterID": "6x40x1",
+    "originalFilter": "12.20.1"
+  },
+  {
+    "length": 6,
+    "width": 48,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.41,
+    "filterID": "6x48x1",
+    "originalFilter": "12.24.1"
+  },
+  {
+    "length": 24,
+    "width": 12,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.41,
+    "filterID": "12x24x1",
+    "originalFilter": "12.24.1"
+  },
+  {
+    "length": 6,
+    "width": 50,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.77,
+    "filterID": "6x50x1",
+    "originalFilter": "12.25.1"
+  },
+  {
+    "length": 12,
+    "width": 25.0,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.77,
+    "filterID": "12x25.0x1",
+    "originalFilter": "12.25.1"
+  },
+  {
+    "length": 6,
+    "width": 60,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.95,
+    "filterID": "6x60x1",
+    "originalFilter": "12.30.1"
+  },
+  {
+    "length": 12,
+    "width": 30,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.95,
+    "filterID": "12x30x1",
+    "originalFilter": "12.30.1"
+  },
+  {
+    "length": 28,
+    "width": 7,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.4,
+    "filterID": "7x28x1",
+    "originalFilter": "14.14.1"
+  },
+  {
+    "length": 7,
+    "width": 40,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.62,
+    "filterID": "7x40x1",
+    "originalFilter": "14.20.1"
+  },
+  {
+    "length": 28,
+    "width": 10,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.62,
+    "filterID": "10x28x1",
+    "originalFilter": "14.20.1"
+  },
+  {
+    "length": 7,
+    "width": 48,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.52,
+    "filterID": "7x48x1",
+    "originalFilter": "14.24.1"
+  },
+  {
+    "length": 28,
+    "width": 12,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.52,
+    "filterID": "12x28x1",
+    "originalFilter": "14.24.1"
+  },
+  {
+    "length": 7,
+    "width": 50,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.85,
+    "filterID": "7x50x1",
+    "originalFilter": "14.25.1"
+  },
+  {
+    "length": 28,
+    "width": 12.5,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.85,
+    "filterID": "12.5x28x1",
+    "originalFilter": "14.25.1"
+  },
+  {
+    "length": 7,
+    "width": 60,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.47,
+    "filterID": "7x60x1",
+    "originalFilter": "14.30.1"
+  },
+  {
+    "length": 14,
+    "width": 30,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.47,
+    "filterID": "14x30x1",
+    "originalFilter": "14.30.1"
+  },
+  {
+    "length": 7.5,
+    "width": 40,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.84,
+    "filterID": "7.5x40x1",
+    "originalFilter": "15.20.1"
+  },
+  {
+    "length": 7.5,
+    "width": 50,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.47,
+    "filterID": "7.5x50x1",
+    "originalFilter": "15.25.1"
+  },
+  {
+    "length": 30,
+    "width": 12.5,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 3.47,
+    "filterID": "12.5x30x1",
+    "originalFilter": "15.25.1"
+  },
+  {
+    "length": 7.5,
+    "width": 60,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.79,
+    "filterID": "7.5x60x1",
+    "originalFilter": "15.30.1"
+  },
+  {
+    "length": 30,
+    "width": 15,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 3.79,
+    "filterID": "15x30x1",
+    "originalFilter": "15.30.1"
+  },
+  {
+    "length": 32,
+    "width": 8,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.51,
+    "filterID": "8x32x1",
+    "originalFilter": "16.16.1"
+  },
+  {
+    "length": 8,
+    "width": 40,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.3,
+    "filterID": "8x40x1",
+    "originalFilter": "16.20.1"
+  },
+  {
+    "length": 32,
+    "width": 10,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.3,
+    "filterID": "10x32x1",
+    "originalFilter": "16.20.1"
+  },
+  {
+    "length": 8,
+    "width": 48,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.51,
+    "filterID": "8x48x1",
+    "originalFilter": "16.24.1"
+  },
+  {
+    "length": 32,
+    "width": 12,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.51,
+    "filterID": "12x32x1",
+    "originalFilter": "16.24.1"
+  },
+  {
+    "length": 8,
+    "width": 50,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.6,
+    "filterID": "8x50x1",
+    "originalFilter": "16.25.1"
+  },
+  {
+    "length": 32,
+    "width": 12.5,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.6,
+    "filterID": "12.5x32x1",
+    "originalFilter": "16.25.1"
+  },
+  {
+    "length": 8,
+    "width": 60,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.79,
+    "filterID": "8x60x1",
+    "originalFilter": "16.30.1"
+  },
+  {
+    "length": 32,
+    "width": 15,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 3.79,
+    "filterID": "15x32x1",
+    "originalFilter": "16.30.1"
+  },
+  {
+    "length": 36,
+    "width": 9,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 3.09,
+    "filterID": "9x36x1",
+    "originalFilter": "18.18.1"
+  },
+  {
+    "length": 9,
+    "width": 40,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.09,
+    "filterID": "9x40x1",
+    "originalFilter": "18.20.1"
+  },
+  {
+    "length": 36,
+    "width": 10,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 3.09,
+    "filterID": "10x36x1",
+    "originalFilter": "18.20.1"
+  },
+  {
+    "length": 9,
+    "width": 48,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.09,
+    "filterID": "9x48x1",
+    "originalFilter": "18.24.1"
+  },
+  {
+    "length": 36,
+    "width": 12,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 3.09,
+    "filterID": "12x36x1",
+    "originalFilter": "18.24.1"
+  },
+  {
+    "length": 9,
+    "width": 50,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.09,
+    "filterID": "9x50x1",
+    "originalFilter": "18.25.1"
+  },
+  {
+    "length": 36,
+    "width": 12.5,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 3.09,
+    "filterID": "12.5x36x1",
+    "originalFilter": "18.25.1"
+  },
+  {
+    "length": 9,
+    "width": 60,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 4.09,
+    "filterID": "9x60x1",
+    "originalFilter": "18.30.1"
+  },
+  {
+    "length": 36,
+    "width": 15,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 4.09,
+    "filterID": "15x36x1",
+    "originalFilter": "18.30.1"
+  },
+  {
+    "length": 40,
+    "width": 10,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.62,
+    "filterID": "10x40x1",
+    "originalFilter": "20.20.1"
+  },
+  {
+    "length": 10,
+    "width": 44,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 3.81,
+    "filterID": "10x44x1",
+    "originalFilter": "20.22.1"
+  },
+  {
+    "length": 40,
+    "width": 11,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 3.81,
+    "filterID": "11x40x1",
+    "originalFilter": "20.22.1"
+  },
+  {
+    "length": 10,
+    "width": 48,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.9,
+    "filterID": "10x48x1",
+    "originalFilter": "20.24.1"
+  },
+  {
+    "length": 40,
+    "width": 12,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.9,
+    "filterID": "12x40x1",
+    "originalFilter": "20.24.1"
+  },
+  {
+    "length": 10,
+    "width": 50,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 2.9,
+    "filterID": "10x50x1",
+    "originalFilter": "20.25.1"
+  },
+  {
+    "length": 40,
+    "width": 12.5,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 2.9,
+    "filterID": "12.5x40x1",
+    "originalFilter": "20.25.1"
+  },
+  {
+    "length": 10,
+    "width": 60,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 4.16,
+    "filterID": "10x60x1",
+    "originalFilter": "20.30.1"
+  },
+  {
+    "length": 40,
+    "width": 15,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 4.16,
+    "filterID": "15x40x1",
+    "originalFilter": "20.30.1"
+  },
+  {
+    "length": 44,
+    "width": 11,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 3.9,
+    "filterID": "11x44x1",
+    "originalFilter": "22.22.1"
+  },
+  {
+    "length": 48,
+    "width": 12,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 3.12,
+    "filterID": "12x48x1",
+    "originalFilter": "24.24.1"
+  },
+  {
+    "length": 12,
+    "width": 60,
+    "height": 1,
+    "orientation": "portrait",
+    "price": 4.41,
+    "filterID": "12x60x1",
+    "originalFilter": "24.30.1"
+  },
+  {
+    "length": 48,
+    "width": 15,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 4.41,
+    "filterID": "15x48x1",
+    "originalFilter": "24.30.1"
+  },
+  {
+    "length": 50,
+    "width": 12.5,
+    "height": 1,
+    "orientation": "landscape",
+    "price": 4.16,
+    "filterID": "12.5x50x1",
+    "originalFilter": "25.25.1"
+  }
+]
