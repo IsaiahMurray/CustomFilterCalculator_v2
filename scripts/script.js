@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     async function loadFileList() {
-        const baseURL = "https://IsaiahMurray.github.io/CustomFilterCalculator_v2/data/"; // GitHub Pages URL
+        const baseURL = "https://github.com/IsaiahMurray/CustomFilterCalculator_v2/blob/main/data/"; // GitHub Pages URL
         try {
             const response = await fetch(baseURL + "files.json"); 
             const { files } = await response.json();
