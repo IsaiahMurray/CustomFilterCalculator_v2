@@ -39,15 +39,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     async function loadFileList() {
+        const baseURL = "https://IsaiahMurray.github.io/CustomFilterCalculator_v2/data/"; // GitHub Pages URL
         try {
-            const response = await fetch("data/files.json");
+            const response = await fetch(baseURL + "files.json"); 
             const { files } = await response.json();
-            return files;
+            return files.map(file => baseURL + file);
         } catch (error) {
             console.error("Error loading file list:", error);
             return [];
         }
     }
+    
+    
 
     async function fetchFileData(file) {
         try {
