@@ -53,15 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
     
     
 
-    async function fetchFileData(file) {
+    async function loadFileList() {
+        const baseURL = "https://IsaiahMurray.github.io/CustomFilterCalculator_v2/"; // Use absolute GitHub Pages URL
         try {
-            const response = await fetch(`https://IsaiahMurray.github.io/CustomFilterCalculator_v2/${file}`);
+            const response = await fetch(baseURL + "data/files.json");
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            return await response.json();
+            const { files } = await response.json();
+            return files.map(file => baseURL + file); // Ensure correct full path
         } catch (error) {
-            console.error(`Error loading ${file}:`, error);
+            console.error("Error loading file list:", error);
             return [];
         }
     }
