@@ -1,3 +1,3 @@
 {
-    "files": ["./../data/filters.json", "./../data/crossSplitFilters1.json", "./../data/quadSplitFilters1.json", "./../data/splitCombinedFilters1.json", "./../data/splitFilters1.json", "./../data/triSplitCombinedFilters.json", "./../data/triSplitFilters1Inch.json"]
+    "files": ["https://isaiahmurray.github.io/CustomFilterCalculator_v2/data/filters.json", "https://isaiahmurray.github.io/CustomFilterCalculator_v2/data/crossSplitFilters1.json", "https://isaiahmurray.github.io/CustomFilterCalculator_v2/data/quadSplitFilters1.json", "https://isaiahmurray.github.io/CustomFilterCalculator_v2/data/splitCombinedFilters1.json", "https://isaiahmurray.github.io/CustomFilterCalculator_v2/data/splitFilters1.json", "https://isaiahmurray.github.io/CustomFilterCalculator_v2/data/triSplitCombinedFilters.json", "https://isaiahmurray.github.io/CustomFilterCalculator_v2/data/triSplitFilters1Inch.json"]
 }
