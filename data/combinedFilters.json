@@ -1,0 +1,203 @@
+[
+    {
+      "length": 10,
+      "width": 30,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 4.86,
+      "filterID": "10x30x1",
+      "filterOne": "10x10x1",
+      "filterTwo": "10x20x1"
+    },
+    {
+      "length": 10,
+      "width": 34,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 5.28,
+      "filterID": "10x34x1",
+      "filterOne": "10x10x1",
+      "filterTwo": "10x24x1"
+    },
+    {
+      "length": 10,
+      "width": 35,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 5.77,
+      "filterID": "10x35x1",
+      "filterOne": "10x10x1",
+      "filterTwo": "10x25x1"
+    },
+    {
+      "length": 10,
+      "width": 40,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 6.24,
+      "filterID": "10x40x1",
+      "filterOne": "10x10x1",
+      "filterTwo": "10x30x1"
+    },
+    {
+      "length": 12,
+      "width": 28,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 4.92,
+      "filterID": "12x28x1",
+      "filterOne": "12x12x1",
+      "filterTwo": "12x16x1"
+    },
+    {
+      "length": 12,
+      "width": 32,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 4.92,
+      "filterID": "12x32x1",
+      "filterOne": "12x12x1",
+      "filterTwo": "12x20x1"
+    },
+    {
+      "length": 12,
+      "width": 36,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 4.92,
+      "filterID": "12x36x1",
+      "filterOne": "12x12x1",
+      "filterTwo": "12x24x1"
+    },
+    {
+      "length": 12,
+      "width": 40,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 5.23,
+      "filterID": "12x40x1",
+      "filterOne": "12x12x1",
+      "filterTwo": "12x30x1"
+    },
+    {
+      "length": 16,
+      "width": 36,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 4.81,
+      "filterID": "16x36x1",
+      "filterOne": "16x16x1",
+      "filterTwo": "16x20x1"
+    },
+    {
+      "length": 16,
+      "width": 40,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 4.81,
+      "filterID": "16x40x1",
+      "filterOne": "16x16x1",
+      "filterTwo": "16x24x1"
+    },
+    {
+      "length": 16,
+      "width": 45,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 5.11,
+      "filterID": "16x45x1",
+      "filterOne": "16x16x1",
+      "filterTwo": "16x30x1"
+    },
+    {
+      "length": 18,
+      "width": 38,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 6.18,
+      "filterID": "18x38x1",
+      "filterOne": "18x18x1",
+      "filterTwo": "18x20x1"
+    },
+    {
+      "length": 18,
+      "width": 42,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 6.18,
+      "filterID": "18x42x1",
+      "filterOne": "18x18x1",
+      "filterTwo": "18x24x1"
+    },
+    {
+      "length": 18,
+      "width": 48,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 6.18,
+      "filterID": "18x48x1",
+      "filterOne": "18x18x1",
+      "filterTwo": "18x30x1"
+    },
+    {
+      "length": 20,
+      "width": 42,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 6.43,
+      "filterID": "20x42x1",
+      "filterOne": "20x20x1",
+      "filterTwo": "20x22x1"
+    },
+    {
+      "length": 20,
+      "width": 46,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 6.53,
+      "filterID": "20x46x1",
+      "filterOne": "20x20x1",
+      "filterTwo": "20x24x1"
+    },
+    {
+      "length": 20,
+      "width": 50,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 6.72,
+      "filterID": "20x50x1",
+      "filterOne": "20x20x1",
+      "filterTwo": "20x30x1"
+    },
+    {
+      "length": 22,
+      "width": 44,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 7.15,
+      "filterID": "22x44x1",
+      "filterOne": "22x22x1",
+      "filterTwo": "22x22x1"
+    },
+    {
+      "length": 24,
+      "width": 54,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 7.53,
+      "filterID": "24x54x1",
+      "filterOne": "24x24x1",
+      "filterTwo": "24x30x1"
+    },
+    {
+      "length": 25,
+      "width": 50,
+      "height": 1,
+      "orientation": "portrait",
+      "price": 8.32,
+      "filterID": "25x50x1",
+      "filterOne": "25x25x1",
+      "filterTwo": "25x25x1"
+    }
+  ]
+  
