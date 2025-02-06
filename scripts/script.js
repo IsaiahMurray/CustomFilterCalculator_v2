@@ -1,14 +1,19 @@
+// Updated script.js to highlight selected filter in canvas
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("filterForm");
     const resultsContainer = document.getElementById("results");
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+    let canvasContainer = document.getElementById("canvasContainer");
 
-    canvas.width = 400;
-    canvas.height = 400;
+    if (!form || !resultsContainer) {
+        console.error("Missing required elements in the DOM.");
+        return;
+    }
 
-    let allMatches = {}; // Store matches grouped by file
-    let currentPages = {}; // Track pagination per file
+    if (!canvasContainer) {
+        canvasContainer = document.createElement("div");
+        canvasContainer.id = "canvasContainer";
+        document.body.appendChild(canvasContainer);
+    }
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -20,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isNaN(inputLength) || isNaN(inputWidth) || isNaN(inputHeight)) return;
 
         const files = await loadFileList();
-        allMatches = {};
+        let allMatches = {};
 
         for (let file of files) {
             const data = await fetchFileData(file);
@@ -30,12 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        displayResults(allMatches);
-
-        const firstFile = Object.keys(allMatches)[0];
-        if (firstFile && allMatches[firstFile].length > 0) {
-            drawCanvas(inputLength, inputWidth, allMatches[firstFile][0]); // Draw first match
-        }
+        displayResults(allMatches, inputLength, inputWidth, inputHeight);
     });
 
     async function loadFileList() {
@@ -60,101 +60,63 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function findMatchingFilters(filters, length, width, height) {
-        return filters
-            .filter(f =>
-                f.height === height &&
-                (
-                    (length <= f.length && width <= f.width) ||
-                    (length <= f.width && width <= f.length)
-                )
-            )
-            .sort((a, b) => a.price - b.price);
+        return filters.filter(f => f.height === height && (
+            (length <= f.length && width <= f.width) ||
+            (length <= f.width && width <= f.length)
+        ));
     }
 
-    function displayResults(groupedResults) {
+    function displayResults(groupedResults, inputLength, inputWidth, inputHeight) {
         resultsContainer.innerHTML = "";
-        currentPages = {};
+        canvasContainer.innerHTML = "";
 
         for (const file in groupedResults) {
-            currentPages[file] = 1;
             const section = document.createElement("div");
             section.classList.add("result-section");
-            section.innerHTML = `
-                <h3>${file.replace("data/", "").replace(".json", "").toUpperCase()}</h3>
-                <ul id="list-${file}"></ul>
-                <div class="pagination">
-                    <button id="prev-${file}" disabled>Prev</button>
-                    <span id="page-${file}">1</span>
-                    <button id="next-${file}">Next</button>
-                </div>
-            `;
-            resultsContainer.appendChild(section);
-            updatePagination(file);
-        }
-    }
+            section.innerHTML = `<h3>${file.replace("data/", "").replace(".json", "").toUpperCase()}</h3><ul></ul>`;
+            const listElement = section.querySelector("ul");
 
-    function updatePagination(file) {
-        const resultsPerPage = 5;
-        const matches = allMatches[file] || [];
-        const totalPages = Math.ceil(matches.length / resultsPerPage);
-        const currentPage = currentPages[file];
-
-        const listElement = document.getElementById(`list-${file}`);
-        listElement.innerHTML = "";
-
-        const startIndex = (currentPage - 1) * resultsPerPage;
-        const endIndex = Math.min(startIndex + resultsPerPage, matches.length);
-
-        for (let i = startIndex; i < endIndex; i++) {
-            const filter = matches[i];
-            const li = document.createElement("li");
-            li.innerHTML = `
-                <input type="radio" name="filterSelect-${file}" value="${i}" ${i === 0 ? "checked" : ""}>
-                <label>Size: ${filter.length <= filter.width ? filter.length : filter.width}x${filter.length >= filter.width ? filter.length : filter.width}x${filter.height}, Price: $${filter.price}</label>
-            `;
-            listElement.appendChild(li);
-        }
-
-        document.querySelectorAll(`input[name="filterSelect-${file}"]`).forEach(radio => {
-            radio.addEventListener("change", (event) => {
-                const selectedIndex = parseInt(event.target.value);
-                drawCanvas(
-                    parseFloat(document.getElementById("length").value),
-                    parseFloat(document.getElementById("width").value),
-                    matches[selectedIndex]
-                );
+            groupedResults[file].forEach((filter, index) => {
+                const li = document.createElement("li");
+                li.innerHTML = `<input type='radio' name='filterSelection' value='${index}'> ${generateMessage(file, filter, inputLength, inputWidth, inputHeight)}`;
+                listElement.appendChild(li);
             });
-        });
 
-        document.getElementById(`prev-${file}`).disabled = currentPage === 1;
-        document.getElementById(`next-${file}`).disabled = currentPage === totalPages;
-        document.getElementById(`page-${file}`).textContent = `${currentPage} / ${totalPages}`;
+            section.addEventListener("change", (event) => {
+                const selectedIndex = event.target.value;
+                addCanvasForFilter(file, groupedResults[file][selectedIndex], inputLength, inputWidth);
+            });
 
-        document.getElementById(`prev-${file}`).onclick = () => {
-            if (currentPages[file] > 1) {
-                currentPages[file]--;
-                updatePagination(file);
-            }
-        };
-
-        document.getElementById(`next-${file}`).onclick = () => {
-            if (currentPages[file] < totalPages) {
-                currentPages[file]++;
-                updatePagination(file);
-            }
-        };
+            resultsContainer.appendChild(section);
+            addCanvasForFilter(file, groupedResults[file][0], inputLength, inputWidth);
+        }
     }
 
-    function drawCanvas(inputLength, inputWidth, selectedFilter) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function generateMessage(file, filter, inputLength, inputWidth, inputHeight) {
+        if (file.includes("SplitFilters")) {
+            return `Cut a ${filter.originalFilter} to make a ${filter.filterID}, then cut down to make a ${inputLength}x${inputWidth}x${inputHeight}`;
+        }
+        if (file.includes("CombinedFilters")) {
+            return `Cut a ${filter.originalFilter} and combine to make a ${filter.filterID}, then cut down to make a ${inputLength}x${inputWidth}x${inputHeight}`;
+        }
+        if (file.includes("filters.json")) {
+            return `Cut a ${filter.filterID} down to make a ${inputLength}x${inputWidth}x${inputHeight}`;
+        }
+        return `Use a ${filter.filterOne} and a ${filter.filterTwo} to make a ${filter.filterID} then cut down to make a ${inputLength}x${inputWidth}x${inputHeight} filter.`;
+    }
 
-        if (!selectedFilter) return;
+    function addCanvasForFilter(file, filter, inputLength, inputWidth) {
+        canvasContainer.innerHTML = "";
+        const canvas = document.createElement("canvas");
+        canvas.width = 400;
+        canvas.height = 200;
+        canvasContainer.appendChild(canvas);
+        const ctx = canvas.getContext("2d");
 
-        const scale = 10;
-        ctx.fillStyle = "blue"; // User requested size
-        ctx.fillRect(50, 50, inputLength * scale, inputWidth * scale);
+        ctx.fillStyle = "blue";
+        ctx.fillRect(50, 50, inputLength * 10, inputWidth * 10);
 
-        ctx.fillStyle = "rgba(255, 0, 0, 0.5)"; // Selected filter
-        ctx.fillRect(50, 50, selectedFilter.length * scale, selectedFilter.width * scale);
+        ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+        ctx.fillRect(50, 50, filter.length * 10, filter.width * 10);
     }
 });
