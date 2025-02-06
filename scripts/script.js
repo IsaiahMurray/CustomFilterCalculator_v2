@@ -1,4 +1,4 @@
-// Updated script.js to highlight selected filter in canvas
+// Updated script.js to display only file names in results
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("filterForm");
     const resultsContainer = document.getElementById("results");
@@ -71,9 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
         canvasContainer.innerHTML = "";
 
         for (const file in groupedResults) {
+            const fileName = file.split("/").pop().replace(".json", "").toUpperCase();
             const section = document.createElement("div");
             section.classList.add("result-section");
-            section.innerHTML = `<h3>${file.replace("data/", "").replace(".json", "").toUpperCase()}</h3><ul></ul>`;
+            section.innerHTML = `<h3>${fileName}</h3><ul></ul>`;
             const listElement = section.querySelector("ul");
 
             groupedResults[file].forEach((filter, index) => {
@@ -94,15 +95,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function generateMessage(file, filter, inputLength, inputWidth, inputHeight) {
         if (file.includes("SplitFilters")) {
-            return `Cut a ${filter.originalFilter} to make a ${filter.filterID}, then cut down to make a ${inputLength}x${inputWidth}x${inputHeight}`;
+            return `Cut a ${filter.originalFilter} to make a ${filter.filterID}, then cut down to make a ${inputLength}x${inputWidth}x${inputHeight} \n Price: ${filter.price}`;
         }
         if (file.includes("CombinedFilters")) {
-            return `Cut a ${filter.originalFilter} and combine to make a ${filter.filterID}, then cut down to make a ${inputLength}x${inputWidth}x${inputHeight}`;
+            return `Cut a ${filter.originalFilter} and combine to make a ${filter.filterID}, then cut down to make a ${inputLength}x${inputWidth}x${inputHeight} \n Price: ${filter.price}`;
         }
         if (file.includes("filters.json")) {
-            return `Cut a ${filter.filterID} down to make a ${inputLength}x${inputWidth}x${inputHeight}`;
+            return `Cut a ${filter.filterID} down to make a ${inputLength}x${inputWidth}x${inputHeight} \n Price: ${filter.price}`;
         }
-        return `Use a ${filter.filterOne} and a ${filter.filterTwo} to make a ${filter.filterID} then cut down to make a ${inputLength}x${inputWidth}x${inputHeight} filter.`;
+        return `Use a ${filter.filterOne} and a ${filter.filterTwo} to make a ${filter.filterID} then cut down to make a ${inputLength}x${inputWidth}x${inputHeight} filter. \n Price: ${filter.price}`;
     }
 
     function addCanvasForFilter(file, filter, inputLength, inputWidth) {

@@ -1,32 +1,111 @@
-.result-section {
-    margin-bottom: 20px;
-    padding: 10px;
-    background: #f9f9f9;
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    background: white;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="decimal"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Result Sections */
+.result-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e9f5ff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .result-section h3 {
     text-align: center;
-    margin-bottom: 10px;
+    color: #007bff;
 }
 
-.pagination {
-    text-align: center;
-    margin-top: 10px;
+.result-section ul {
+    list-style: none;
+    padding: 0;
 }
 
-.pagination button {
-    padding: 5px 10px;
-    margin: 0 5px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
+.result-section li {
+    background: white;
+    padding: 10px;
+    margin: 5px 0;
     border-radius: 5px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s;
 }
 
-.pagination button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.result-section li:hover {
+    background: #dceeff;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Canvas Styling */
+#canvasContainer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+canvas {
+    border: 2px solid #007bff;
+    background: white;
+    border-radius: 8px;
 }
