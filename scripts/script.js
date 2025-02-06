@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const li = document.createElement("li");
             li.innerHTML = `
                 <input type="radio" name="filterSelect-${file}" value="${i}" ${i === 0 ? "checked" : ""}>
-                <label>Size: ${filter.length}x${filter.width}x${filter.height}, Price: $${filter.price}</label>
+                <label>Size: ${filter.length <= filter.width ? filter.length : filter.width}x${filter.length >= filter.width ? filter.length : filter.width}x${filter.height}, Price: $${filter.price}</label>
             `;
             listElement.appendChild(li);
         }
