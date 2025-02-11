@@ -1,4 +1,4 @@
-// Updated script.js to display only file names in results
+// Wait for the DOM to be fully loaded before executing the script
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("filterForm");
     const resultsContainer = document.getElementById("results");
@@ -9,21 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    // Create canvas container if it does not exist
     if (!canvasContainer) {
         canvasContainer = document.createElement("div");
         canvasContainer.id = "canvasContainer";
         document.body.appendChild(canvasContainer);
     }
 
+    // Event listener for form submission
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
+        // Retrieve and validate input values
         const inputLength = parseFloat(document.getElementById("length").value);
         const inputWidth = parseFloat(document.getElementById("width").value);
         const inputHeight = parseFloat(document.getElementById("height").value);
 
-        if (isNaN(inputLength) || isNaN(inputWidth) || isNaN(inputHeight)) return;
+        if (isNaN(inputLength) || isNaN(inputWidth) || isNaN(inputHeight)) {
+            alert("Please enter valid numerical values for length, width, and height.");
+            return;
+        }
 
+        // Load filter data and find matching filters
         const files = await loadFileList();
         let allMatches = {};
 
@@ -35,9 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
+        // Display results
         displayResults(allMatches, inputLength, inputWidth, inputHeight);
     });
 
+    /**
+     * Fetch the list of available filter data files.
+     */
     async function loadFileList() {
         try {
             const response = await fetch("data/files.json");
@@ -49,6 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    /**
+     * Fetch JSON data for a given file.
+     * @param {string} file - The file URL.
+     */
     async function fetchFileData(file) {
         try {
             const response = await fetch(file);
@@ -59,6 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    /**
+     * Find filters that match the user input.
+     * @param {Array} filters - List of filters.
+     * @param {number} length - Input length.
+     * @param {number} width - Input width.
+     * @param {number} height - Input height.
+     */
     function findMatchingFilters(filters, length, width, height) {
         return filters.filter(f => f.height === height && (
             (length <= f.length && width <= f.width) ||
@@ -66,6 +88,13 @@ document.addEventListener("DOMContentLoaded", () => {
         ));
     }
 
+    /**
+     * Display the filter matching results in the UI.
+     * @param {Object} groupedResults - Object containing matched filters grouped by file.
+     * @param {number} inputLength - User input length.
+     * @param {number} inputWidth - User input width.
+     * @param {number} inputHeight - User input height.
+     */
     function displayResults(groupedResults, inputLength, inputWidth, inputHeight) {
         resultsContainer.innerHTML = "";
         canvasContainer.innerHTML = "";
@@ -93,6 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    /**
+     * Generate the descriptive message for a filter option.
+     */
     function generateMessage(file, filter, inputLength, inputWidth, inputHeight) {
         if (file.includes("SplitFilters")) {
             return `Cut a ${filter.originalFilter} to make a ${filter.filterID}, then cut down to make a ${inputLength}x${inputWidth}x${inputHeight} \n Price: ${filter.price}`;
@@ -103,9 +135,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (file.includes("filters.json")) {
             return `Cut a ${filter.filterID} down to make a ${inputLength}x${inputWidth}x${inputHeight} \n Price: ${filter.price}`;
         }
-        return `Use a ${filter.filterOne} and a ${filter.filterTwo} to make a ${filter.filterID} then cut down to make a ${inputLength}x${inputWidth}x${inputHeight} filter. \n Price: ${filter.price}`;
+        return `Use a ${filter.filterOne} and a ${filter.filterTwo} to make a ${filter.filterID}, then cut down to make a ${inputLength}x${inputWidth}x${inputHeight} filter. \n Price: ${filter.price}`;
     }
 
+    /**
+     * Render a visual representation of the selected filter.
+     */
     function addCanvasForFilter(file, filter, inputLength, inputWidth) {
         canvasContainer.innerHTML = "";
         const canvas = document.createElement("canvas");
@@ -114,9 +149,11 @@ document.addEventListener("DOMContentLoaded", () => {
         canvasContainer.appendChild(canvas);
         const ctx = canvas.getContext("2d");
 
+        // Draw user input dimensions
         ctx.fillStyle = "blue";
         ctx.fillRect(50, 50, inputLength * 10, inputWidth * 10);
 
+        // Draw matching filter dimensions
         ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
         ctx.fillRect(50, 50, filter.length * 10, filter.width * 10);
     }
